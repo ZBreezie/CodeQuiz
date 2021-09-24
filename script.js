@@ -22,18 +22,18 @@ startButton.addEventListener('click', startQuiz)
 
 var questionsList = [
     {
-        quest: "Commonly used data types do NOT include",
-        answ: [
+        question: "Commonly used data types do NOT include",
+        answers: [
             {text: 'strings', correct: false},
-            {text: 'boolean', correct: false},
+            {text: 'booleans', correct: false},
             {text: 'numbers', correct: false},
             {text: 'alerts', correct: true}
         ]
     },
 
     {
-        quest: "Arrays in JavaScript can be used to store...",
-        answ: [
+        question: "Arrays in JavaScript can be used to store _______",
+        answers: [
             {text: 'numbers and strings', correct: false},
             {text: 'other arrays', correct: false},
             {text: 'booleans', correct: false},
@@ -42,32 +42,32 @@ var questionsList = [
     },
 
     {
-        quest: "Commonly used data types do NOT include",
-        answ: [
-            {text: 'strings', correct: false},
-            {text: 'boolean', correct: false},
-            {text: 'numbers', correct: false},
-            {text: 'alerts', correct: true}
+        question: "The condition in an if/else statement is enclosed with _______",
+        answers: [
+            {text: 'quotes', correct: false},
+            {text: 'curly brackets', correct: false},
+            {text: 'parentheses', correct: true},
+            {text: 'semicolons', correct: false}
         ]
     },
 
     {
-        quest: "Commonly used data types do NOT include",
-        answ: [
-            {text: 'strings', correct: false},
-            {text: 'boolean', correct: false},
-            {text: 'numbers', correct: false},
-            {text: 'alerts', correct: true}
+        question: "A very useful tool used during development and debugging for printing content to the debugger is ______",
+        answers: [
+            {text: 'for loops', correct: false},
+            {text: 'if/else statements', correct: false},
+            {text: 'console.log', correct: true},
+            {text: 'screwdriver', correct: false}
         ]
     },
 
     {
-        quest: "Commonly used data types do NOT include",
-        answ: [
-            {text: 'strings', correct: false},
-            {text: 'boolean', correct: false},
-            {text: 'numbers', correct: false},
-            {text: 'alerts', correct: true}
+        question: "String values must be enclosed within _______ before being assigned to variables",
+        answers: [
+            {text: 'commas', correct: false},
+            {text: 'curly brackets', correct: false},
+            {text: 'quotes', correct: true},
+            {text: 'parentheses', correct: false}
         ]
     }
 ]
