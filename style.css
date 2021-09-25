@@ -24,7 +24,7 @@ main {
     padding: 5px 10px;
 }
 
-.btn {
+.btn, .answerbtn {
     background-color: rgb(172, 111, 230);
 }
 
