@@ -16,15 +16,14 @@
 <body>
     <main class="container">
         <div id="question-container" class="hide">
-            <p id="question">Question</p>
+            <p id="question"> </p>
             <div id="answerButton" class="answerStyle">
-                <button id="button1" class="answerbtn" value="0">Answer 1</button>
-                <button id="button2" class="answerbtn" value="1">Answer 2</button>
-                <button id="button3" class="answerbtn" value="2">Answer 3</button>
-                <button id="button4" class="answerbtn" value="3">Answer 4</button>
+                <button id="button1" class="answerbtn" value="0"> </button>
+                <button id="button2" class="answerbtn" value="1"> </button>
+                <button id="button3" class="answerbtn" value="2"> </button>
+                <button id="button4" class="answerbtn" value="3"> </button>
             </div>
-            <div id="timer">
-                <h2></h2>
+            <div>
                 <p id="timerDisplay"></p>
             </div>
         </div>
@@ -32,8 +31,13 @@
         <div class="begin">
             <button id="startButton" class="startButton btn" value="0">Start</button>
         </div>
-    </main>
 
+        <div id="end" class="hide endStyle">
+            <p>Your Quiz is over!</p>
+            <button id="retry" class="retrybtn btn" value="0"> Retry! </button>
+            <button id="saveScore" class="savebtn btn" value="1"> Save! </button>
+        </div>
+    </main>
 
     <script src="script.js"></script>
     

@@ -1,8 +1,9 @@
 var startButton = document.getElementById('startButton')
 var questionContent = document.getElementById('question-container')
+var endScreen = document.getElementById('end')
 
 var currentQuestion = 0
-var sec = 60
+var sec = 15
 
 //get all answer buttons by class for answer choice comparison
 var answerButton = document.getElementsByClassName('answerbtn')
@@ -11,8 +12,8 @@ var answerButton = document.getElementsByClassName('answerbtn')
 
 
 function startQuiz() {
-    console.log('Hello')
     timer()
+    console.log('Hello')
     startButton.classList.add('hide')
     questionContent.classList.remove('hide')
     loadQnA()
@@ -20,12 +21,13 @@ function startQuiz() {
 
 function timer(){
         
-        var timer = setInterval(function(){
+    var timer = setInterval(function(){
         document.getElementById('timerDisplay').innerHTML='00:'+sec
         sec--
         if (sec < 0) {
             clearInterval(timer)
             questionContent.classList.add('hide')
+            endScreen.classList.remove('hide')
         }
     }, 1000);
 }
@@ -51,6 +53,7 @@ function checkAnswer(clientInput) {
 
     if (currentQuestion > 4) {
         questionContent.classList.add('hide')
+        endScreen.classList.remove('hide')
     }
     
     else {
@@ -59,7 +62,7 @@ function checkAnswer(clientInput) {
 }
 
 // Listens to the start button to execute "startQuiz" on click
-$('#startButton').on('click', startQuiz);
+$('#startButton').on('click', timer, startQuiz);
 
 // Listens to the answer buttons to execute "checkAnswer" on click
 $('.answerbtn').on('click', checkAnswer);
