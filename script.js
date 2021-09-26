@@ -3,26 +3,40 @@ var questionContent = document.getElementById('question-container')
 var endScreen = document.getElementById('end')
 var endScore = document.getElementById("scoreOutput")
 
-// first index of question array
-var currentQuestion = 0
 
-// timer clock
-var sec = 15
+// // first index of question array
+// var currentQuestion = 0
 
-// Quiz taker score total
-var score = 0
+// // timer clock
+// var sec = 15
+
+// // Quiz taker score total
+ //var score = 0
 
 //get all answer buttons by class for answer choice comparison
 var answerButton = document.getElementsByClassName('answerbtn')
 
 
 
+// sets default variables for a new quiz run
+function reset() {
+    currentQuestion = 0
+    sec = 10
+    score = 0
+    document.getElementById('scoreOutput').innerHTML = "Your score is " + score + " out of 5!"
+    startQuiz()
+  }
 
 
-// STARTS TIMER, HIDES START SCREEN, LOADS QNA
+
+
+
+  // STARTS TIMER, HIDES START SCREEN, LOADS QNA
 function startQuiz() {
     timer()
     console.log('Hello')
+    document.getElementById('scoreTotal').innerHTML = "Your score is " + score + " out of 5!"
+    endScreen.classList.add('hide')
     startButton.classList.add('hide')
     questionContent.classList.remove('hide')
     loadQnA()
@@ -32,14 +46,15 @@ function startQuiz() {
 
 
 
-
+// subtracts 1 from "sec" every 1000 milliseconds. When sec is less than zero, timer stop/switch to endscreen
 function timer(){
-        
     var timer = setInterval(function(){
         document.getElementById('timerDisplay').innerHTML='Time: 00:'+sec
         sec--
-        if (sec < 0) {
+        // if timer is < 0 OR questions array has looped entirely clearInterval!
+        if (sec < 0 || currentQuestion > 4) {
             clearInterval(timer)
+            document.getElementById('scoreOutput').innerHTML = "Your score is " + score + " out of 5!"
             questionContent.classList.add('hide')
             endScreen.classList.remove('hide')
         }
@@ -69,8 +84,6 @@ function loadQnA() {
 
 
 
-
-
 function checkAnswer(clientInput) {
     console.log(clientInput.currentTarget.value)
     var userAnswer = clientInput.currentTarget.value
@@ -85,19 +98,22 @@ function checkAnswer(clientInput) {
         document.getElementById('timerDisplay').innerHTML='00:'+sec;
         console.log("Incorrect!")
     }
-    
-    document.getElementById("scoreOutput").innerHTML = "Your score is " + score + " out of 5!";
+
     console.log(score)
     currentQuestion ++
+    
 
     if (currentQuestion > 4) {
         questionContent.classList.add('hide')
         endScreen.classList.remove('hide')
     }
+
     
     else {
         loadQnA()
     }
+    document.getElementById('scoreOutput').innerHTML = "Your score is " + score + " out of 5!"
+    document.getElementById('scoreTotal').innerHTML = "Your score is " + score + " out of 5!"
 }
 
 
@@ -106,19 +122,19 @@ function checkAnswer(clientInput) {
 
 
 
-
-
-
-
-
-
-
 // Listens to the start button to execute "startQuiz" on click
-$('#startButton').on('click', timer, startQuiz);
+$('#startButton').on('click', reset);
 
 // Listens to the answer buttons to execute "checkAnswer" on click
 $('.answerbtn').on('click', checkAnswer);
+
+$('#retryButton').on('click', reset);
    
+
+
+
+
+
 
 // Object which holds questions, answers, and the correct answer pointing to its index
 var questionsArray = [
