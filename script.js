@@ -1,9 +1,16 @@
 var startButton = document.getElementById('startButton')
 var questionContent = document.getElementById('question-container')
 var endScreen = document.getElementById('end')
+var endScore = document.getElementById("scoreOutput")
 
+// first index of question array
 var currentQuestion = 0
+
+// timer clock
 var sec = 15
+
+// Quiz taker score total
+var score = 0
 
 //get all answer buttons by class for answer choice comparison
 var answerButton = document.getElementsByClassName('answerbtn')
@@ -11,6 +18,8 @@ var answerButton = document.getElementsByClassName('answerbtn')
 
 
 
+
+// STARTS TIMER, HIDES START SCREEN, LOADS QNA
 function startQuiz() {
     timer()
     console.log('Hello')
@@ -19,10 +28,15 @@ function startQuiz() {
     loadQnA()
 }
 
+
+
+
+
+
 function timer(){
         
     var timer = setInterval(function(){
-        document.getElementById('timerDisplay').innerHTML='00:'+sec
+        document.getElementById('timerDisplay').innerHTML='Time: 00:'+sec
         sec--
         if (sec < 0) {
             clearInterval(timer)
@@ -32,6 +46,14 @@ function timer(){
     }, 1000);
 }
 
+
+
+
+
+
+
+
+// DISPLAYS CURRENT POSITION IN QUESTION ARRAY
 function loadQnA() {
     document.getElementById("question").innerHTML = questionsArray[currentQuestion].question
 
@@ -39,6 +61,15 @@ function loadQnA() {
         answerButton [i].innerHTML = questionsArray[currentQuestion].choices[i]
     }
 }
+
+
+
+
+
+
+
+
+
 
 function checkAnswer(clientInput) {
     console.log(clientInput.currentTarget.value)
@@ -48,6 +79,14 @@ function checkAnswer(clientInput) {
         score ++
         console.log("Correct!")
     }
+
+    if (userAnswer != questionsArray[currentQuestion].correctAnswer){
+        sec -= 10;
+        document.getElementById('timerDisplay').innerHTML='00:'+sec;
+        console.log("Incorrect!")
+    }
+    
+    document.getElementById("scoreOutput").innerHTML = "Your score is " + score + " out of 5!";
     console.log(score)
     currentQuestion ++
 
@@ -61,14 +100,25 @@ function checkAnswer(clientInput) {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Listens to the start button to execute "startQuiz" on click
 $('#startButton').on('click', timer, startQuiz);
 
 // Listens to the answer buttons to execute "checkAnswer" on click
 $('.answerbtn').on('click', checkAnswer);
    
-// Quiz takers score total
-var score = 0;
 
 // Object which holds questions, answers, and the correct answer pointing to its index
 var questionsArray = [
@@ -103,6 +153,4 @@ var questionsArray = [
     }
 ]
 
-// end screen //output score
 //store score in local
-//timer //timer minus 10 seconds per incorrect input
