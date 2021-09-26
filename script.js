@@ -2,7 +2,7 @@ var startButton = document.getElementById('startButton')
 var questionContent = document.getElementById('question-container')
 
 var currentQuestion = 0
-var sec = 2
+var sec = 60
 
 //get all answer buttons by class for answer choice comparison
 var answerButton = document.getElementsByClassName('answerbtn')
