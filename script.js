@@ -1,21 +1,36 @@
 var startButton = document.getElementById('startButton')
 var questionContent = document.getElementById('question-container')
+
 var currentQuestion = 0
+var sec = 2
 
 //get all answer buttons by class for answer choice comparison
 var answerButton = document.getElementsByClassName('answerbtn')
 
 
+
+
 function startQuiz() {
     console.log('Hello')
-    console.log(startButton.value)
+    timer()
     startButton.classList.add('hide')
     questionContent.classList.remove('hide')
-    loadAnswers()
-
+    loadQnA()
 }
 
-function loadAnswers() {
+function timer(){
+        
+        var timer = setInterval(function(){
+        document.getElementById('timerDisplay').innerHTML='00:'+sec
+        sec--
+        if (sec < 0) {
+            clearInterval(timer)
+            questionContent.classList.add('hide')
+        }
+    }, 1000);
+}
+
+function loadQnA() {
     document.getElementById("question").innerHTML = questionsArray[currentQuestion].question
 
         for(var i=0; i < 4; i++) {
@@ -29,7 +44,7 @@ function checkAnswer(clientInput) {
     
     if (userAnswer == questionsArray[currentQuestion].correctAnswer){
         score ++
-        console.log("correctAnswer")
+        console.log("Correct!")
     }
     console.log(score)
     currentQuestion ++
@@ -39,26 +54,20 @@ function checkAnswer(clientInput) {
     }
     
     else {
-        loadAnswers()
+        loadQnA()
     }
-    
-
 }
 
-$('#startButton').on('click', startQuiz); {
+// Listens to the start button to execute "startQuiz" on click
+$('#startButton').on('click', startQuiz);
 
+// Listens to the answer buttons to execute "checkAnswer" on click
+$('.answerbtn').on('click', checkAnswer);
    
-};
-
-
-$('.answerbtn').on('click', checkAnswer); {
-   
-};
-
-
-
+// Quiz takers score total
 var score = 0;
 
+// Object which holds questions, answers, and the correct answer pointing to its index
 var questionsArray = [
     {
         question: "Commonly used data types do NOT include _______",
@@ -91,8 +100,6 @@ var questionsArray = [
     }
 ]
 
-// end screen
-//timer
-//output score
+// end screen //output score
 //store score in local
-//
+//timer //timer minus 10 seconds per incorrect input
