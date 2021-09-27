@@ -5,15 +5,6 @@ var endScore = document.getElementById("scoreOutput")
 var highscoreScreen = document.getElementById("highscores")
 
 
-// // first index of question array
-// var currentQuestion = 0
-
-// // timer clock
-// var sec = 15
-
-// // Quiz taker score total
- //var score = 0
-
 //get all answer buttons by class for answer choice comparison
 var answerButton = document.getElementsByClassName('answerbtn')
 
@@ -84,7 +75,7 @@ function loadQnA() {
 
 
 
-
+// checks which button is clicked, and compares to question index's correct answer, if wrong lose 10 seconds
 function checkAnswer(clientInput) {
     console.log(clientInput.currentTarget.value)
     var userAnswer = clientInput.currentTarget.value
@@ -103,7 +94,7 @@ function checkAnswer(clientInput) {
     console.log(score)
     currentQuestion ++
     
-
+// force end at last question
     if (currentQuestion > 4) {
         questionContent.classList.add('hide')
         endScreen.classList.remove('hide')
@@ -125,6 +116,7 @@ function showScores() {
     var initialsArray = JSON.parse(localStorage.getItem("initials"))
     var scoreArray = JSON.parse(localStorage.getItem("score"))
     
+    // prints each "score" in its own <p>
     for (let index = 0; index < initialsArray.length; index++) {  
         var tag = document.createElement("p");
         var text = document.createTextNode(initialsArray[index] + " - " + scoreArray[index]);
@@ -136,7 +128,7 @@ function showScores() {
 
 
 function save() {
-    
+    // get initials
     var initials = window.prompt('Enter Your initials!');
     
     var initialsArray = JSON.parse(localStorage.getItem("initials"))
@@ -171,10 +163,14 @@ $('#startButton').on('click', reset);
 // Listens to the answer buttons to execute "checkAnswer" on click
 $('.answerbtn').on('click', checkAnswer);
 
+// Listens to retry in order to reset
 $('#retryButton').on('click', reset);
 
+//Listens to save button to initialize window prompt/save function
 $('#saveScore').on('click', save);
 
+// Listens to Highscores button to print <p> for each locally stored score
+// ONLY WORKS ONCE PER PAGE LOAD TO AVOID PRINT SPAM
 $('#highbtn').one('click', showScores);
    
 
@@ -215,5 +211,3 @@ var questionsArray = [
         correctAnswer: 2
     }
 ]
-
-//store score in local
