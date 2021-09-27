@@ -141,12 +141,16 @@ function save() {
     
     var initialsArray = JSON.parse(localStorage.getItem("initials"))
     var scoreArray = JSON.parse(localStorage.getItem("score"))
+
+    if(initialsArray == null || scoreArray == null) {
+        initialsArray = []
+        scoreArray = []
+        localStorage.setItem("initials", JSON.stringify(initialsArray))
+        localStorage.setItem("score", JSON.stringify (scoreArray))
+    }
     
     initialsArray.push(initials)
     scoreArray.push(score)
-
-    
-
 
     localStorage.setItem("initials", JSON.stringify(initialsArray))
     localStorage.setItem("score", JSON.stringify (scoreArray))
