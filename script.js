@@ -2,6 +2,7 @@ var startButton = document.getElementById('startButton')
 var questionContent = document.getElementById('question-container')
 var endScreen = document.getElementById('end')
 var endScore = document.getElementById("scoreOutput")
+var highscoreScreen = document.getElementById("highscores")
 
 
 // // first index of question array
@@ -21,7 +22,7 @@ var answerButton = document.getElementsByClassName('answerbtn')
 // sets default variables for a new quiz run
 function reset() {
     currentQuestion = 0
-    sec = 10
+    sec = 60
     score = 0
     document.getElementById('scoreOutput').innerHTML = "Your score is " + score + " out of 5!"
     startQuiz()
@@ -117,7 +118,45 @@ function checkAnswer(clientInput) {
 }
 
 
+function showScores() {
+    
+    highscoreScreen.classList.remove('hide')
 
+    var initialsArray = JSON.parse(localStorage.getItem("initials"))
+    var scoreArray = JSON.parse(localStorage.getItem("score"))
+    
+    for (let index = 0; index < initialsArray.length; index++) {  
+        var tag = document.createElement("p");
+        var text = document.createTextNode(initialsArray[index] + " - " + scoreArray[index]);
+        tag.appendChild(text);
+        var element = document.getElementById("highscores");
+        element.appendChild(tag);
+    }
+}
+
+
+function save() {
+    
+    var initials = window.prompt('Enter Your initials!');
+    
+    var initialsArray = JSON.parse(localStorage.getItem("initials"))
+    var scoreArray = JSON.parse(localStorage.getItem("score"))
+    
+    initialsArray.push(initials)
+    scoreArray.push(score)
+
+    
+
+
+    localStorage.setItem("initials", JSON.stringify(initialsArray))
+    localStorage.setItem("score", JSON.stringify (scoreArray))
+    
+    
+    
+    // console.log(initials)
+    // console.log(score)
+    console.log(localStorage)
+}
 
 
 
@@ -129,6 +168,10 @@ $('#startButton').on('click', reset);
 $('.answerbtn').on('click', checkAnswer);
 
 $('#retryButton').on('click', reset);
+
+$('#saveScore').on('click', save);
+
+$('#highbtn').one('click', showScores);
    
 
 
