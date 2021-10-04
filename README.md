@@ -1,4 +1,4 @@
-# PasswordGenerator
+# Code Quiz!
 
 ## Purpose
 An instructional quiz where your scores will be saved locally! An exercize in localStorage, and JavaScript!
